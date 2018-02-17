@@ -7,8 +7,7 @@ int length(const char* str);
 void sort(char* arr, int n);
 
 bool is_isogram(const char* phrase) {
-
-    int n = length(phrase);
+    int n = strlen(phrase);
 
     if (n == 1)  return true;
     
@@ -26,15 +25,6 @@ bool is_isogram(const char* phrase) {
     }
     free(buffer);
     return true;
-}
-
-int length(const char* str) {
-    int n = 0;
-    char c = str[0];
-    while (c != '\0') {
-        c = str[n++];
-    }
-    return n;
 }
 
 void sort(char* arr, int n) {
