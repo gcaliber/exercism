@@ -3,39 +3,32 @@
 #include <string.h>
 #include <ctype.h>
 
-int length(const char* str);
-void sort(char* arr, int n);
+int compare_chars (const void *a, const void *b) {
+   return ( *(char*)a - *(char*)b );
+}
 
 bool is_isogram(const char* phrase) {
     int n = strlen(phrase);
 
-    if (n == 1)  return true;
+    if (n == 1) return true;
     
-    char* buffer = malloc(n * sizeof(phrase[0]));
-    strcpy(buffer, phrase);
-    sort(buffer, n);
+    char* buffer = malloc(n * sizeof(phrase[0]) + 1);
+    
+    for (int i = 0; i < n + 1; i++) {
+        buffer[i] = tolower(phrase[i]);
+    }
+
+    qsort(buffer, (size_t) n, sizeof(phrase[0]), compare_chars);
+    
     int i, j;
     for (i = 1; i < n; i++) {
         j = i - 1;
         if (buffer[i] == '-' || buffer[i] == ' ')  continue;
-        if (tolower(buffer[i]) == tolower(buffer[j])) {
+        if (buffer[i] == buffer[j]) {
             free(buffer);
             return false;
         }
     }
     free(buffer);
     return true;
-}
-
-void sort(char* arr, int n) {
-   int i, j, value;
-   for (i = 1; i < n; i++) {
-       value = arr[i];
-       j = i - 1;
-       while (j >= 0 && arr[j] > value) {
-           arr[j + 1] = arr[j];
-           j = j - 1;
-       }
-       arr[j + 1] = value;
-   }
 }
