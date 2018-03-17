@@ -3,7 +3,7 @@ CFLAGS += -g
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -pedantic
-CFLAGS += -Werror
+#CFLAGS += -Werror
 
 VFLAGS  = --quiet
 VFLAGS += --tool=memcheck
