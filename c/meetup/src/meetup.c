@@ -66,11 +66,12 @@ int meetup_day_of_month(int year, int month, char *day_type_str, char *wday_str)
         return day;
     }
     else if (strcmp(day_type_str, "last") == 0) {
+        day += 28;
         int days_in_month = month_days(month, year);
-        while (day <= days_in_month) {
-            day += 7;
+        if (day > days_in_month) {
+            return day - 7;
         }
-        return day - 7;
+        return day;
     }
     return -1;
 }
