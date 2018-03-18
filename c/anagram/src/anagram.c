@@ -15,12 +15,6 @@ void str_tolower(char *str) {
 
 void anagrams_for(const char *word, struct candidates *candidates)
 {
-    printf("\n\n     Word: %s\n", word);
-    for (int i = 0; i < (int)candidates->count; i++) {
-        printf("Candidate: %s\n", candidates->candidate[i].candidate);
-    }
-    printf("\n");
-    
     size_t length = strlen(word);
     
     for (int i = 0; i < (int)candidates->count; i++) {
@@ -38,8 +32,6 @@ void anagrams_for(const char *word, struct candidates *candidates)
     strcpy(word_sorted, word_lower);
     qsort(word_sorted, length, sizeof(char), compare_chars);
     
-    printf("Sorted Word: %s\n", word_sorted);
-    
     for (int i = 0; i < (int)candidates->count; i++) {
         struct candidate *c = &candidates->candidate[i];
         if (c->is_anagram == UNCHECKED) {
@@ -50,8 +42,7 @@ void anagrams_for(const char *word, struct candidates *candidates)
             char candidate_sorted[MAX_STR_LEN];
             strcpy(candidate_sorted, candidate_lower);
             qsort(candidate_sorted, length, sizeof(char), compare_chars);
-
-            printf("Sorted Candidate: %s\n", candidate_sorted);
+    
             if (strcmp(word_sorted, candidate_sorted) == 0 && strcmp(word_lower, candidate_lower) != 0) {
                 c->is_anagram = IS_ANAGRAM;
             }
