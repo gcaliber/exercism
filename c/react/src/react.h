@@ -1,14 +1,26 @@
 #ifndef REACT_H
 #define REACT_H
 
-struct reactor {
-    struct cell *cells;
-    int cell_count;
-};
-struct cell;
-
 typedef int (*compute1) (int);
 typedef int (*compute2) (int, int);
+
+typedef void (*callback) (void *, int);
+typedef int callback_id;
+
+struct reactor {
+    struct cell *cells;
+    int cells_size;
+    int cell_count;
+};
+
+struct cell {
+    int value;
+    struct cell *a;
+    struct cell *b;
+    compute1 *f1;
+    compute2 *f2;
+    callback *cb;
+};
 
 struct reactor *create_reactor();
 // destroy_reactor should free all cells created under that reactor.
@@ -21,9 +33,6 @@ struct cell *create_compute2_cell(struct reactor *, struct cell *,
 
 int get_cell_value(struct cell *);
 void set_cell_value(struct cell *, int new_value);
-
-typedef void (*callback) (void *, int);
-typedef int callback_id;
 
 // The callback should be called with the same void * given in add_callback.
 callback_id add_callback(struct cell *, void *, callback);
