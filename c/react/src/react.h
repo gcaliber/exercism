@@ -15,11 +15,11 @@ struct reactor {
 
 struct cell {
     int value;
+    void (*f)();
     struct cell *a;
     struct cell *b;
-    compute1 *f1;
-    compute2 *f2;
     callback *cb;
+    struct cell *next;
 };
 
 struct reactor *create_reactor();
