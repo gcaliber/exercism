@@ -42,6 +42,8 @@ void destroy_reactor(struct reactor *r) {
         destroy_nodes(c);
         free(c);
     }
+    free(r->cells);
+    free(r);
 }
 
 struct cell *new_cell(struct reactor *r) {
