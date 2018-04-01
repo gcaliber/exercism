@@ -1,0 +1,4 @@
+#ifndef PALINDROME_PRODUCTS_H
+#define PALINDROME_PRODUCTS_H
+
+#endif
