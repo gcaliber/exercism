@@ -18,11 +18,12 @@ bool is_palindrome(int n)
     return true;
 }
 
-void destroy_factor(factor_t *f)
+void destroy_factor(factor_t **f)
 {
-    if (f) {
-        destroy_factor(f->next);
-        free(f);
+    if (*f) {
+        destroy_factor(&(*f)->next);
+        free(*f);
+        *f = NULL;
     }
 }
 
@@ -38,14 +39,16 @@ void add_factor(factor_t **old, int a, int b)
 product_t *get_palindrome_product(int min, int max)
 {
     product_t *product = malloc(sizeof(product_t));
-
-    if (min > max) {
-        sprintf(product->error, "invalid input: min is %d and max is %d", min, max);
-        return product;
-    }    
     
     product->smallest = max * max;
     product->largest  = 0;
+    product->factors_sm = NULL;
+    product->factors_lg = NULL;
+    
+    if (min > max) {
+        sprintf(product->error, "invalid input: min is %d and max is %d", min, max);
+        return product;
+    }
     
     for (int a = min; a <= max; a++) {
         for (int b = a; b <= max; b++) {
@@ -55,8 +58,7 @@ product_t *get_palindrome_product(int min, int max)
                     if (p <= product->smallest) {
                         if (p < product->smallest) {
                             product->smallest = p;
-                            destroy_factor(product->factors_sm);
-                            product->factors_sm = NULL;
+                            destroy_factor(&product->factors_sm);
                         }
                         add_factor(&product->factors_sm, a, b);
                     }
@@ -64,8 +66,7 @@ product_t *get_palindrome_product(int min, int max)
                     if (p >= product->largest) {
                         if (p > product->largest) {
                             product->largest = p;
-                            destroy_factor(product->factors_lg);
-                            product->factors_lg = NULL;
+                            destroy_factor(&product->factors_lg);
                         }
                         add_factor(&product->factors_lg, a, b);
                     }
@@ -84,8 +85,8 @@ product_t *get_palindrome_product(int min, int max)
 void free_product(product_t *product)
 {
     if (product) {
-        destroy_factor(product->factors_sm);
-        destroy_factor(product->factors_lg);
+        destroy_factor(&product->factors_sm);
+        destroy_factor(&product->factors_lg);
         free(product);
     }
 }
