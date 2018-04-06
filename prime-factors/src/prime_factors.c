@@ -24,6 +24,7 @@ uint64_t next_prime(uint64_t p, primes_t *primes)
             for (int i = 0; i < primes->count; i++) {
                 if (candidates[j] % primes->arr[i] == 0) {
                     candidates[j] = 0;
+                    if (primes->arr[i] > (uint64_t) sqrt(candidates[j])) break;
                 }
             }
             if (candidates[j]) {
