@@ -1,0 +1,56 @@
+[
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-std=c99",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-Werror",
+            "-DUNITY_SUPPORT_64",
+            "-o",
+            "tests.out",
+            "test/test_linked_list.c"
+        ],
+        "directory": "/home/mike/projects/exercism/c/linked-list",
+        "file": "test/test_linked_list.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-std=c99",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-Werror",
+            "-DUNITY_SUPPORT_64",
+            "-o",
+            "tests.out",
+            "test/vendor/unity.c"
+        ],
+        "directory": "/home/mike/projects/exercism/c/linked-list",
+        "file": "test/vendor/unity.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-std=c99",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-Werror",
+            "-DUNITY_SUPPORT_64",
+            "-o",
+            "tests.out",
+            "src/linked_list.c"
+        ],
+        "directory": "/home/mike/projects/exercism/c/linked-list",
+        "file": "src/linked_list.c"
+    }
+]
